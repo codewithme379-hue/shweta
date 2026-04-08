@@ -37,27 +37,18 @@ h1{font-family:'Baloo 2',cursive;font-size:clamp(2.2rem,7vw,3.8rem);line-height:
 .badge{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#aaa;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem;}
 .badge::before,.badge::after{content:'';flex:1;height:1px;background:#e8e8e8;}
 
-.gift-wrap{cursor:pointer;margin-bottom:1.5rem;transition:transform .15s;display:inline-block;}
-.gift-wrap:hover{transform:scale(1.08) rotate(-2deg);}
-.gift-wrap:active{transform:scale(.93);}
-.shake{animation:shake .35s ease;}
-@keyframes shake{0%,100%{transform:rotate(-2deg);}25%{transform:rotate(6deg) scale(1.1);}50%{transform:rotate(-5deg) scale(1.08);}75%{transform:rotate(4deg) scale(1.05);}}
+.photo-frame{border-radius:24px;overflow:hidden;border:6px solid #fff;box-shadow:0 15px 45px rgba(0,0,0,.15);display:inline-block;margin-bottom:1.5rem;}
+.photo-frame img{display:block;width:auto;height:auto;max-width:92vw;max-height:52vh;object-fit:contain;}
 
-.photo-frame{border-radius:24px;overflow:hidden;border:4px solid #fff;box-shadow:0 10px 40px rgba(0,0,0,.12);max-width:400px;width:95%;margin-bottom:1.2rem;background:#fff;}
-.photo-frame img{width:100%;max-height:500px;display:block;object-fit:contain;background:#fdfcf8;}
-.photo-ph{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,#ffe8f0,#ffd6fa);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;}
-.photo-ph .icon{font-size:2.5rem;}
-.photo-ph p{color:#cc77aa;font-size:.8rem;font-weight:600;}
+.quote-bubble{background:#fff;border-radius:20px;padding:1.2rem 1.6rem;box-shadow:0 8px 30px rgba(0,0,0,.1);font-size:1.15rem;color:#333;font-weight:600;max-width:85vw;width:fit-content;margin-bottom:2rem;border-left:5px solid;}
 
-.quote-bubble{background:#fff;border-radius:20px;padding:1rem 1.4rem;box-shadow:0 4px 20px rgba(0,0,0,.08);font-size:1rem;color:#333;font-weight:600;max-width:300px;margin-bottom:1.5rem;border-left:4px solid;}
-
-.final-name{font-family:'Baloo 2',cursive;font-size:clamp(2.5rem,8vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:.5rem;}
-.confetti-strip{font-size:1.6rem;letter-spacing:.2em;margin:1rem 0;animation:bounce 1s ease infinite alternate;}
-@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-6px);}}
-.final-msg{font-size:1rem;color:#444;max-width:360px;line-height:1.8;margin-bottom:2rem;}
+.final-name{font-family:'Baloo 2',cursive;font-size:clamp(2.5rem,8vw,5rem);font-weight:800;line-height:1.1;margin-bottom:.8rem;}
+.confetti-strip{font-size:2rem;letter-spacing:.2em;margin:1.5rem 0;animation:bounce 1s ease infinite alternate;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-8px);}}
+.final-msg{font-size:1.1rem;color:#444;max-width:90vw;width:500px;line-height:1.8;margin-bottom:2.5rem;}
 .final-msg strong{color:#ff6b6b;}
-.photos-row{display:flex;gap:1.5rem;margin-bottom:1.5rem;justify-content:center;flex-wrap:wrap;}
-.photos-row .photo-frame{max-width:350px;width:100%;border-radius:18px;margin-bottom:0;}
+.photos-row{display:flex;width:100%;justify-content:center;margin-bottom:1.5rem;}
+.photos-row .photo-frame{margin-bottom:0;}
 </style>
 </head>
 <body>
@@ -75,115 +66,74 @@ h1{font-family:'Baloo 2',cursive;font-size:clamp(2.2rem,7vw,3.8rem);line-height:
   <div style="font-size:3rem;margin-bottom:.5rem;animation:bounce 1s ease infinite alternate;">🎉</div>
   <div class="badge">A special surprise awaits</div>
   <h1>Hey <span class="rainbow">Shweta!</span></h1>
-  <p class="subtitle">Something really special has been made just for you. Ready to unwrap the fun? 🎊</p>
+  <p class="subtitle">Something really special has been made just for you. Ready to explore? 🎊</p>
   <div class="dots">
-    <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
   </div>
   <button class="btn btn-open" onclick="goTo(1)">Let's Go! 🎈</button>
 </div>
 
-<!-- Screen 1: Gift 1 -->
+<!-- Screen 1: Stage 1 -->
 <div class="screen" id="s1">
-  <div class="badge">Level 1 / 4</div>
-  <h1 style="color:#ff6b6b;">Tap the<br/>gift! 🎁</h1>
+  <div class="badge">Level 1 / 3</div>
   <div class="dots">
-    <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
   </div>
-  <div class="gift-wrap" id="g1" onclick="openGift(1)">
-    <svg width="130" height="140" viewBox="0 0 130 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="55" width="110" height="75" rx="10" fill="#ff6b6b"/>
-      <rect x="5" y="47" width="120" height="24" rx="8" fill="#ffa94d"/>
-      <rect x="57" y="47" width="16" height="83" fill="#ffd43b"/>
-      <ellipse cx="65" cy="47" rx="26" ry="14" fill="none" stroke="#ffd43b" stroke-width="3"/>
-      <path d="M65 47 C53 30 34 27 38 39 C41 47 57 47 65 47" fill="#ffd43b"/>
-      <path d="M65 47 C77 30 96 27 92 39 C89 47 73 47 65 47" fill="#ff922b"/>
-      <circle cx="28" cy="90" r="5" fill="#ffd43b" opacity=".5"/>
-      <circle cx="100" cy="110" r="4" fill="#fff" opacity=".3"/>
-    </svg>
-  </div>
-</div>
-
-<!-- Screen 2: Photo 1 -->
-<div class="screen" id="s2">
-  <div class="badge">Level 2 / 4</div>
-  <div class="dots">
-    <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
-  </div>
-  <!-- PHOTO 1: Replace the div below with: <img src="your-photo-url.jpg" alt="Shweta"> -->
   <div class="photos-row">
     <div class="photo-frame"><img src="1.jpeg" alt="Shweta"></div>
-    <div class="photo-frame"><img src="2.jpeg" alt="Shweta"></div>
   </div>
   <div class="quote-bubble" style="border-color:#ff6b6b;">
-    ✨ The most beautiful smile in the universe!
+    ✨ Most beautiful girl i have ever seen in my life 😊
   </div>
-  <button class="btn btn-next" onclick="goTo(3)">Next surprise! 🎊</button>
+  <button class="btn btn-next" onclick="goTo(2)">Next! 🎊</button>
 </div>
 
-<!-- Screen 3: Gift 2 -->
-<div class="screen" id="s3">
-  <div class="badge">Level 3 / 4</div>
-  <h1 style="color:#cc5de8;">One more<br/>surprise! 🎁</h1>
+<!-- Screen 2: Stage 2 -->
+<div class="screen" id="s2">
+  <div class="badge">Level 2 / 3</div>
   <div class="dots">
-    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+    <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
   </div>
-  <div class="gift-wrap" id="g2" onclick="openGift(2)">
-    <svg width="130" height="140" viewBox="0 0 130 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="55" width="110" height="75" rx="10" fill="#cc5de8"/>
-      <rect x="5" y="47" width="120" height="24" rx="8" fill="#4dabf7"/>
-      <rect x="57" y="47" width="16" height="83" fill="#69db7c"/>
-      <ellipse cx="65" cy="47" rx="26" ry="14" fill="none" stroke="#69db7c" stroke-width="3"/>
-      <path d="M65 47 C53 30 34 27 38 39 C41 47 57 47 65 47" fill="#69db7c"/>
-      <path d="M65 47 C77 30 96 27 92 39 C89 47 73 47 65 47" fill="#40c057"/>
-      <circle cx="30" cy="95" r="4" fill="#ffd43b" opacity=".5"/>
-      <circle cx="98" cy="75" r="3" fill="#fff" opacity=".3"/>
-    </svg>
-  </div>
-</div>
-
-<!-- Screen 4: Photo 2 -->
-<div class="screen" id="s4">
-  <div class="badge">Level 4 / 4</div>
-  <div class="dots">
-    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
-  </div>
-  <!-- PHOTO 2: Replace the div below with: <img src="your-photo-url.jpg" alt="Shweta"> -->
   <div class="photos-row">
-    <div class="photo-frame"><img src="3.jpeg" alt="Shweta"></div>
-    <div class="photo-frame"><img src="4.jpeg" alt="Shweta"></div>
+    <div class="photo-frame"><img src="2.jpeg" alt="Shweta"></div>
   </div>
   <div class="quote-bubble" style="border-color:#4dabf7;">
-    🌟 You light up every room you walk into!
+    🌟 Favorite person 🤗
   </div>
-  <button class="btn btn-final" onclick="goTo(5)">Final surprise! 🎂</button>
+  <button class="btn btn-next" onclick="goTo(3)">Next! 🎊</button>
 </div>
 
-<!-- Screen 5: Final -->
-<div class="screen" id="s5">
+<!-- Screen 3: Stage 3 -->
+<div class="screen" id="s3">
+  <div class="badge">Level 3 / 3</div>
+  <div class="dots">
+    <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+  </div>
+  <div class="photos-row">
+    <div class="photo-frame"><img src="3.jpeg" alt="Shweta"></div>
+  </div>
+  <div class="quote-bubble" style="border-color:#69db7c;">
+    💖 Most talented girl in world❤️
+  </div>
+  <button class="btn btn-final" onclick="goTo(4)">Final surprise! 🎂</button>
+</div>
+
+<!-- Screen 4: Final -->
+<div class="screen" id="s4">
   <div class="confetti-strip">🎉 🎂 🎈 🎊 🎁</div>
   <div class="final-name"><span class="rainbow">Happy Birthday</span><br/>Shweta! 🎂</div>
-  <div class="photos-row">
-    <!-- FINAL PHOTOS: Replace divs below with <img> tags -->
-    <div class="photo-frame"><img src="5.jpeg" alt="Shweta"></div>
-    <div class="photo-frame"><img src="6.jpeg" alt="Shweta"></div>
-  </div>
   <p class="final-msg">
     You are <strong>absolutely one in a million</strong>, Shweta! 🌈<br/>
     May your day be as bright, colorful, and joyful as YOU are.<br/>
     Wishing you the most amazing birthday ever! 🥳💖
   </p>
-  <button class="btn btn-open" onclick="launchConfetti()" style="font-size:1.2rem;">🎊 Party Time!</button>
 </div>
 
 <script>
 function goTo(n){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
-}
-function openGift(n){
-  const el=document.getElementById('g'+n);
-  el.classList.add('shake');
-  setTimeout(()=>{el.classList.remove('shake');goTo(n===1?2:4);},380);
+  if(n === 4) launchConfetti();
 }
 
 const canvas=document.getElementById('confetti');
